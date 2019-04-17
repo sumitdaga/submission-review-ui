@@ -4,6 +4,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import cn from 'classnames'
+import { Link } from 'react-router-dom'
 import styles from './Table.module.scss'
 
 const Table = (props) => {
@@ -46,13 +47,16 @@ Table.Row.propTypes = {
 
 Table.Col = (props) => {
   return (
-    <td style={{ flex: props.width || 0 }} {...props}>{props.children}</td>
+    <td style={{ flex: props.width || 0 }} {...props}>
+      {props.to ? <Link to={props.to}>{props.children}</Link> : props.children}
+    </td>
   )
 }
 
 Table.Col.propTypes = {
   children: PropTypes.node,
-  width: PropTypes.number
+  width: PropTypes.number,
+  to: PropTypes.string
 }
 
 Table.ExpandableRow = (props) => {

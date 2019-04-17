@@ -72,14 +72,22 @@ const getPhaseInfo = (c) => {
 }
 
 const ChallengeCard = ({ challenge, options, history }) => {
-  const onClick = () => history.push(`challenges/${challenge.id}`)
-  const roles = challenge.userDetails && challenge.userDetails.roles && challenge.userDetails.roles.map((r, i) => (
-    <span className='block' key={`challenge-role-${r}-${i}`}>{r}</span>
-  ))
+  const roles = []
+  challenge.userDetails && challenge.userDetails.roles && challenge.userDetails.roles.some((r, i, arr) => {
+    if (i < 2) {
+      roles.push(<span className='block' key={`challenge-role-${r}-${i}`}>{r}</span>)
+      return false
+    } else {
+      roles.push(<span className='block' key={`challenge-role-${r}-${i}`}>{arr.length - 2} more</span>)
+      return true
+    }
+  })
   const { phaseMessage, endTime } = getPhaseInfo(challenge)
+  const challengeLink = `/challenges/${challenge.id}`
+
   return (
-    <Row className={styles.item} onClick={onClick}>
-      <Col width={options[0].width} className={styles.challengeName}>
+    <Row className={styles.item}>
+      <Col width={options[0].width} className={styles.challengeName} to={challengeLink}>
         <div>
           <TrackIcon className={styles.icon} track={challenge.track} subTrack={challenge.subTrack} />
         </div>
@@ -88,12 +96,12 @@ const ChallengeCard = ({ challenge, options, history }) => {
           <span className='block light-text'>Ends {getEndDate(challenge)}</span>
         </div>
       </Col>
-      <Col width={options[1].width}>{roles}</Col>
-      <Col width={options[2].width}>
+      <Col width={options[1].width} to={challengeLink}>{roles}</Col>
+      <Col width={options[2].width} to={challengeLink}>
         <span className='block'>{phaseMessage}</span>
         <span className='block light-text'>{endTime}</span>
       </Col>
-      <Col width={options[3].width}>
+      <Col width={options[3].width} to={challengeLink}>
         <div className={styles.stats}>
           <div className={styles.faIconContainer}>
             <FontAwesomeIcon icon={faUser} className={styles.faIcon} />
