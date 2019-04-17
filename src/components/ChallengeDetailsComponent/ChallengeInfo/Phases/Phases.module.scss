@@ -5,14 +5,13 @@
 }
 
 .circle {
-  display: inline-flex;
   width: 8px;
   height: 8px;
   min-width: 8px;
   min-height: 8px;
   border-radius: 50%;
   background-color: $inactive;
-  margin: 0 10px;
+  margin: 0 10px 0 5px;
   vertical-align: middle;
 }
 
@@ -23,6 +22,10 @@
 
 .phase {
   display: flex;
+
+  > * {
+    padding: 0 5px;
+  }
 }
 
 .phase.open {
@@ -31,9 +34,8 @@
 
 .type {
   flex: 3;
-  > span{
-    vertical-align: middle;
-  }
+  display: flex;
+  align-items: center;
 }
 
 .type.open {
@@ -48,6 +50,5 @@
 .duration {
   flex: 1;
   text-align: right;
-  padding-right: 7px;
 }
 

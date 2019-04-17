@@ -2,6 +2,7 @@
 
 .prizes{
   display: flex;
+  flex-wrap: wrap;
   :nth-child(1) {
     border-bottom-color: $green;
   }
@@ -10,7 +11,7 @@
   font-size: 22px;
   line-height: 29px;
   border-bottom: 2px solid $lighter-gray;
-  margin-right: 21px;
+  margin: 0 21px 13px 0;
 }
 
 .rank {
